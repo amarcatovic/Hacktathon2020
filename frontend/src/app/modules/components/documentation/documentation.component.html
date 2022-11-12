@@ -1,0 +1,129 @@
+<div class="bckg">
+  <app-sidebar></app-sidebar>
+  <!-- <div style="margin-left: 90px; height: 100vh; width: 100%;" class="main-container container col-11" *ngIf="!create">
+  <h1 class="mb-5 font-weight-bold text-primary">Documentation</h1>
+  <div class="search-container row justify-content-center w-100">
+    <div class="search-bar md-form col-8">
+      <input class="form-control" type="text" placeholder="Search for Docs" aria-label="Search" [(ngModel)]="documentationSearchName">
+    </div>
+    <div class="add-docs-btn-container col-4">
+      <button type="button" (click)="createDocument()" class="add-docs-btn btn btn-small">ADD DOC</button>
+    </div>
+  </div>
+  <div class="results-container row justify-content-center">
+    <div class="result" *ngFor="let doc of documents | search:documentationSearchName:'name'">
+      <div class="result-content">
+        <h4 class="title">{{ doc.name }}</h4>
+      </div>
+      <div class="view-btn-container">
+        <a class="view-doc-btn btn btn-small" [href]="doc.pdfUrl" target="blank">VIEW</a>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+  <div
+    *ngIf="!create"
+    style="
+      margin-left: 60px;
+      padding-top: 100px;
+      height: 100vh;
+      flex-direction: column;
+    "
+    class="calendar d-flex w-100"
+  >
+    <div class="w-75">
+      <h1 class="mb-5 font-weight-bold text-primary" style="padding-left: 50px">
+        Documentation
+      </h1>
+    </div>
+    <div class="w-100 d-flex" style="margin-bottom: 50px">
+      <div class="md-form col-1"></div>
+      <div class="search-bar md-form col-8">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Search for Docs"
+          aria-label="Search"
+          [(ngModel)]="documentationSearchName"
+        />
+      </div>
+      <div class="add-docs-btn-container col-2">
+        <button
+          type="button"
+          (click)="createDocument()"
+          class="add-docs-btn btn btn-small"
+        >
+          ADD DOC
+        </button>
+      </div>
+    </div>
+    <div
+      class="result"
+      *ngFor="let doc of documents | search: documentationSearchName:'name'"
+    >
+      <div class="result-content">
+        <h4 class="title">{{ doc.name }}</h4>
+      </div>
+      <div class="view-btn-container">
+        <a
+          class="view-doc-btn btn btn-small p-2"
+          [href]="doc.pdfUrl"
+          target="blank"
+          >VIEW</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div
+    style="
+      margin-left: 60px;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    "
+    class="d-flex justify-content-center"
+    *ngIf="create"
+  >
+    <form
+      [formGroup]="uploadForm"
+      (ngSubmit)="upload($event)"
+      enctype="multipart/form-data"
+    >
+      <div class="form-group">
+        <label>Documentation Name</label>
+        <input type="text" class="form-control" formControlName="name" />
+      </div>
+      <div class="form-group" style="margin: 30px 0">
+        <label>Documentation File</label>
+        <input
+          type="file"
+          id="file"
+          class="form-control"
+          formControlName="file"
+          (change)="onFileSelect($event)"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        style="background-color: #559c8b"
+      >
+        Add
+      </button>
+      <button
+        type="button"
+        class="btn btn-secundary"
+        style="background-color: #554c77"
+        (click)="createDocument()"
+      >
+        Go Back
+      </button>
+    </form>
+  </div>
+</div>

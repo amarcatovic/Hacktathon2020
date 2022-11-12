@@ -1,0 +1,93 @@
+<app-sidebar></app-sidebar>
+<div class="d-flex flex-column">
+  <video id="myvideo" class="d-none" #myvideo></video>
+
+  <!-- <input type="text" [(ngModel)]="friendId" /> -->
+</div>
+<div class="main">
+  <div class="chat d-flex justify-content-center align-items-center">
+    <div class="row b h-100 w-85">
+      <div class="col-3 p-0">
+        <div class="row">
+          <div class="col-12" style="height: 120px"></div>
+        </div>
+        <div class="active w-100">
+          <div *ngFor="let item of users; let i = index">
+            <div
+              class="containerMain d-flex align-items-center"
+              *ngIf="item.id != user.id"
+              (click)="chatWithUser($event, item.id)"
+              [class.activeC]="activeV == true"
+              id="{{ item.name }}"
+            >
+              <img class="image" src="{{ item.photoUrl }}" alt="" />
+              <div class="text">
+                <h6>{{ item.name }}</h6>
+                <div class="d-flex align-items-center">
+                  <small class="d-flex align-items-center"
+                    >Active now <span class="dot ml-1"></span
+                  ></small>
+                  <div *ngIf="item.counter > 0">{{ item.counter }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-9 chat_field">
+        <div class="row">
+          <div class="col-12 b h-25">
+            <div class="d-flex align-items-center">
+              <img
+                src="{{ user.photoUrl }}"
+                class="rounded-circle profileImg mt-2"
+              />
+              <div class="ml-2">
+                <h3 class="font-weight-bold">{{ user.fullName }}</h3>
+                <div class="d-flex align-items-center">
+                  <small class="d-flex align-items-center status"
+                    >Active now <span class="dot ml-1"></span
+                  ></small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 live-chat">
+            <div
+              *ngFor="let user1 of chat; let i = index"
+              [ngClass]="
+                user1.peerID == friendId
+                  ? 'd-flex justify-content-start mt-3'
+                  : 'd-flex justify-content-end mt-3'
+              "
+            >
+              <div *ngIf="user1.peerID == friendId" class="friend p-2 mb-3">
+                <p
+                  class="d-flex align-items-center justify-content-center mr-1"
+                >
+                  {{ user1.messages }}
+                </p>
+              </div>
+              <div *ngIf="user1.peerID != friendId" class="me p-2 mb-3">
+                <p
+                  class="d-flex align-items-center justify-content-center mr-1"
+                >
+                  {{ user1.messages }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group pr-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Write something"
+              [(ngModel)]="message"
+              (keydown.enter)="sendMessage($event)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

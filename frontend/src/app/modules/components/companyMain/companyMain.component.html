@@ -1,0 +1,104 @@
+<app-sidebar></app-sidebar>
+<!-- <div class="main">
+    <div class="main-container ">
+      <h1 class="mb-5 font-weight-bold text-primary">Dashboard</h1>
+      <div class="results-container row justify-content-center col-8">
+        <div class="result col-8">
+          <div class="result-content" *ngFor="let task of tasks">
+            <h5 *ngIf="task.eventEndDate > currentDate" class="title">{{ task.userName }} is currently doing: {{ task.title }}</h5>  
+            <h5 *ngIf="!(task.eventEndDate > currentDate)" class="title">{{ task.userName }} has finished: {{ task.title }}</h5> 
+          </div>
+        </div>
+      </div>
+      <div class="results-container users-container justify-content-center">
+        <div class="result user" *ngFor="let user of users">
+          <div class="result-content user-content">
+            <img [src]="user.photoUrl"
+              width="30px" class="icon">
+            <h6 class="title username">{{ user.name }}</h6>
+            <p class="user-state">Online</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div> -->
+<div class="d-flex justify-content-center">
+  <div class="squares square1"></div>
+  <div class="squares square2"></div>
+  <div class="squares square3"></div>
+  <div class="squares square5"></div>
+  <div class="squares square5"></div>
+  <div class="squares square5"></div>
+  <div class="squares square7"></div>
+  <div
+    style="
+      margin-left: 60px;
+      padding-top: 100px;
+      height: 100vh;
+      flex-direction: column;
+    "
+    class="calendar d-flex w-90"
+  >
+    <div class="w-75">
+      <h1 class="mb-5 font-weight-bold text-primary">Dashboard</h1>
+    </div>
+    <div class="row">
+      <div class="col-6 pr-3">
+        <h2 class="text-primary font-weight-bold">Activities:</h2>
+        <h6 style="padding-bottom: 50px" class="text-muted">
+          What tasks are others currently doing
+        </h6>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb" *ngFor="let task of tasks">
+            <img
+              [src]="task.userPhotoUrl"
+              height="20px"
+              width="30px"
+              style="padding-right: 10px;"
+            />
+            <li
+              *ngIf="!(task.eventEndDate > currentDate)"
+              class="breadcrumb-item active font-weight-bold"
+              aria-current="page"
+            >
+              {{ task.userName }} is currently doing: {{ task.title }}
+            </li>
+            <li
+              *ngIf="task.eventEndDate > currentDate"
+              class="breadcrumb-item active font-weight-bold"
+              aria-current="page"
+            >
+              {{ task.userName }} has finished: {{ task.title }}
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <div class="col-6 pl-5">
+        <h2 class="text-primary font-weight-bold">Who's here</h2>
+        <h6 class="text-muted">Meet your coworkers</h6>
+        <div class="row mt-5 w-100">
+          <div
+            class="col-4 d-flex justify-content-center flex-column align-items-center card mr-3 mt-3 mb-3"
+            *ngFor="let user of users"
+          >
+            <img [src]="user.photoUrl" class="rounded-circle mb-2 mainImgMin" />
+            <h5 class="card-title font-weight-bold text-primary">
+              {{ user.name }}
+            </h5>
+
+            <!-- <div class="row no-gutters">
+            <div class="col-md-11">
+              <div class="card-body">
+               
+              </div>
+            </div>
+            <div class="col-md-1">
+              
+            </div>
+          </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

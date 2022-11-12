@@ -1,0 +1,13 @@
+.home {
+  height: 2000px;
+}
+.redirectButtons {
+  z-index: 200000000000000;
+}
+.moving-clouds {
+  z-index: -10;
+}
+.icon {
+  width: 100px;
+  height: 50px;
+}

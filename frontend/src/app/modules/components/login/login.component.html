@@ -1,0 +1,131 @@
+<div class="wrapper">
+  <div
+    class="page-header"
+    style="
+      background-image: url('https://images.pexels.com/photos/34088/pexels-photo.jpg?cs=srgb&dl=pexels-negative-space-34088.jpg&fm=jpg');
+    "
+  >
+    <div class="container mt-5 pt-5">
+      <div
+        class="col-lg-4 col-sm-6 mr-auto ml-auto flip-card"
+        @myInsertRemoveTrigger
+      >
+        <div class="flip-card-inner" [class.filp]="isRegister">
+          <div class="card card-register flip-card-front">
+            <h3 class="title text-white font-weight-bold">Welcome</h3>
+            <div class="social-line text-center">
+              <a class="btn btn-neutral btn-google btn-just-icon" #loginRef>
+                <img
+                  src="https://media.discordapp.net/attachments/776080923036614686/780055529920921620/google.png"
+                  style="width: 20px; height: 20px"
+                />
+              </a>
+            </div>
+            <form
+              class="register-form"
+              [formGroup]="loginForm"
+              (ngSubmit)="Submit($event)"
+            >
+              <p class="font-weight-bold">Email</p>
+              <div
+                class="input-group form-group-no-border"
+                [class.has-danger]="
+                  loginForm.get('email').errors?.required &&
+                  loginForm.get('email').touched
+                "
+                [class.has-success]="
+                  loginForm.get('email').touched && loginForm.get('email').valid
+                "
+                [ngClass]="{ 'input-group-focus': focus === true }"
+              >
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="nc-icon nc-email-85"></i>
+                  </span>
+                </div>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Email"
+                  (focus)="focus = true"
+                  (blur)="focus = false"
+                  formControlName="email"
+                  [class.form-control-danger]="
+                    loginForm.get('email').touched &&
+                    loginForm.get('email').invalid
+                  "
+                  [class.form-control-success]="
+                    loginForm.get('email').touched &&
+                    loginForm.get('email').valid
+                  "
+                />
+              </div>
+              <div
+                *ngIf="loginForm.invalid && loginForm.get('email').touched"
+                class="mt-0 mb-2"
+              >
+                <small
+                  *ngIf="loginForm.get('email').errors?.required"
+                  class="text-danger"
+                  >Email is required</small
+                >
+                <small
+                  *ngIf="loginForm.get('email').errors?.email"
+                  class="text-danger"
+                  >Email has not valid form</small
+                >
+              </div>
+              <label class="font-weight-bold">Password</label>
+              <div
+                class="input-group form-group-no-border"
+                [ngClass]="{ 'input-group-focus': focus1 === true }"
+              >
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="nc-icon nc-key-25"></i>
+                  </span>
+                </div>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  (focus)="focus1 = true"
+                  (blur)="focus1 = false"
+                  formControlName="password"
+                  [class.form-control-danger]="
+                    loginForm.get('password').touched &&
+                    loginForm.get('password').invalid
+                  "
+                  [class.form-control-success]="
+                    loginForm.get('password').touched &&
+                    loginForm.get('password').valid
+                  "
+                />
+              </div>
+              <div
+                *ngIf="loginForm.invalid && loginForm.get('password').touched"
+                class="mt-0 mb-2"
+              >
+                <small
+                  class="text-danger"
+                  *ngIf="loginForm.get('password').errors?.pattern"
+                  >Password must contain at least one letter, at least one
+                  number, and be longer than six charaters.</small
+                >
+                <small
+                  class="text-danger"
+                  *ngIf="loginForm.get('password').errors?.required"
+                  >Password must contain at least one letter, at least one
+                  number, and be longer than six charaters.</small
+                >
+              </div>
+
+              <button class="btn btn-primary btn-block btn-round">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

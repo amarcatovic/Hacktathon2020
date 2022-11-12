@@ -1,0 +1,48 @@
+h3 {
+  margin: 0 0 10px;
+}
+
+pre {
+  background-color: #f5f5f5;
+  padding: 15px;
+}
+.bg-pink {
+  background-color: red !important;
+}
+.w-90 {
+  width: 90%;
+}
+.bckg {
+  background-image: url("https://media.discordapp.net/attachments/776080923036614686/780000024809439232/chatBackgroundVer2.png?width=1026&height=677");
+  background-size: cover;
+
+  background-repeat: no-repeat;
+}
+.calendar {
+  width: 90% !important;
+}
+.zoom {
+  transition: all 0.2s ease;
+}
+.zoom:hover {
+  transform: scale(1.05);
+}
+.dot {
+  background-color: rgb(124, 0, 0);
+}
+.dotPublic {
+  background-color: rgb(2, 34, 122);
+}
+.dotPublic,
+.dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.legend {
+  z-index: 500;
+}
+.legendWidth {
+  width: 130px;
+}

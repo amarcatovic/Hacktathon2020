@@ -1,0 +1,226 @@
+<div class="bckg">
+  <app-sidebar></app-sidebar>
+
+  <div
+    style="margin-left: 60px; padding-top: 150px"
+    class="calendar d-flex justify-content-center"
+  >
+    <div class="w-75">
+      <h1 class="mb-3 font-weight-bold text-primary">Calendar</h1>
+      <div class="legend d-flex flex-column mb-5">
+        <div
+          class="legendWidth d-flex justify-content-between align-items-center"
+        >
+          <strong class="mr-2 font-weight-bold">Private Events</strong
+          ><span class="dot"></span>
+        </div>
+        <div
+          class="legendWidth d-flex justify-content-between align-items-center"
+        >
+          <strong class="mr-2 font-weight-bold">Public Events</strong
+          ><span class="dotPublic"></span>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-md-4">
+          <div class="btn-group">
+            <div
+              class="btn btn-primary zoom"
+              mwlCalendarPreviousView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()"
+            >
+              <
+            </div>
+            <div
+              class="btn btn-success"
+              style="background-color: #559c8b"
+              mwlCalendarToday
+              [(viewDate)]="viewDate"
+            >
+              Today
+            </div>
+            <div
+              class="btn btn-primary zoom"
+              mwlCalendarNextView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()"
+            >
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h3>{{ viewDate | calendarDate: view + "ViewTitle":"en" }}</h3>
+        </div>
+        <div class="col-md-4">
+          <div class="btn-group">
+            <div
+              class="btn btn-primary zoom"
+              (click)="setView(CalendarView.Month)"
+              [class.active]="view === CalendarView.Month"
+              style="width: 100px"
+            >
+              Month
+            </div>
+            <div
+              class="btn btn-primary zoom"
+              (click)="setView(CalendarView.Week)"
+              [class.active]="view === CalendarView.Week"
+              style="width: 100px"
+            >
+              Week
+            </div>
+            <div
+              class="btn btn-primary zoom"
+              (click)="setView(CalendarView.Day)"
+              [class.active]="view === CalendarView.Day"
+              style="width: 100px"
+            >
+              Day
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div [ngSwitch]="view">
+        <mwl-calendar-month-view
+          *ngSwitchCase="CalendarView.Month"
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+          [activeDayIsOpen]="activeDayIsOpen"
+          (dayClicked)="dayClicked($event.day)"
+          (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)"
+        >
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view
+          *ngSwitchCase="CalendarView.Week"
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+          (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)"
+        >
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view
+          *ngSwitchCase="CalendarView.Day"
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+          (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)"
+        >
+        </mwl-calendar-day-view>
+      </div>
+
+      <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
+
+      <br /><br /><br />
+
+      <h3 class="mb-2 mt-2">
+        Edit events
+        <app-modal-component></app-modal-component>
+
+        <div class="clearfix"></div>
+      </h3>
+
+      <div class="table-responsive pt-4">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Title</th>
+
+              <th>Starts at</th>
+              <th>Ends at</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let event of events">
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="event.title"
+                  (keyup)="updateTitle(event)"
+                />
+              </td>
+
+              <td>
+                <input
+                  class="form-control"
+                  type="datetime-local"
+                  mwlFlatpickr
+                  [(ngModel)]="event.start"
+                  (ngModelChange)="dateUpdate(event)"
+                  [altInput]="true"
+                  [convertModelValue]="true"
+                  [enableTime]="true"
+                  dateFormat="Y-m-dTH:i"
+                  altFormat="F j, Y H:i"
+                  placeholder="Not set"
+                />
+              </td>
+              <td>
+                <input
+                  class="form-control"
+                  type="datetime-local"
+                  mwlFlatpickr
+                  [(ngModel)]="event.end"
+                  (ngModelChange)="dateUpdate(event)"
+                  [altInput]="true"
+                  [convertModelValue]="true"
+                  [enableTime]="true"
+                  dateFormat="Y-m-dTH:i"
+                  altFormat="F j, Y H:i"
+                  placeholder="Not set"
+                />
+              </td>
+              <td>
+                <button
+                  class="btn btn-danger zoom"
+                  (click)="deleteEvent(event)"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #modalContent let-close="close">
+        <div class="modal-header">
+          <h5 class="modal-title">Event action occurred</h5>
+          <button type="button" class="close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            Action:
+            <pre>{{ modalData?.action }}</pre>
+          </div>
+          <div>
+            Event:
+            <pre>{{ modalData?.event | json }}</pre>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-secondary zoom"
+            (click)="close()"
+          >
+            OK
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

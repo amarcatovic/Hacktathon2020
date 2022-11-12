@@ -1,0 +1,248 @@
+<div class="wrapper">
+    <div
+      class="page-header"
+      style="background-image: url('./assets/img/login-image.jpg')"
+    >
+      <div class="container mt-5 pt-5">
+        <div
+          class="col-lg-4 col-sm-6 mr-auto ml-auto flip-card"
+          @myInsertRemoveTrigger
+        >
+          <div class="flip-card-inner" [class.filp]="isRegister">
+            <div class="card card-register flip-card-front">
+              <h3 class="title text-primary font-weight-bold">Welcome</h3>
+              <div class="social-line text-center">
+                <a class="btn btn-neutral btn-google btn-just-icon" #loginRef>
+                  <i class="fa fa-google-plus"></i>
+                </a>
+              </div>
+              <form
+                class="register-form"
+                [formGroup]="registrationForm"
+                (ngSubmit)="Submit($event)"
+              >
+                <label>Full name</label>
+                <div
+                  class="input-group form-group-no-border"
+                  [class.has-danger]="
+                    (registrationForm.get('fullName').errors?.required ||
+                      registrationForm.get('fullName').errors?.minlength) &&
+                    registrationForm.get('fullName').touched
+                  "
+                  [class.has-success]="
+                    registrationForm.get('fullName').touched &&
+                    registrationForm.get('fullName').valid
+                  "
+                  [ngClass]="{ 'input-group-focus': focus1 === true }"
+                >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="nc-icon nc-badge"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Full name"
+                    (focus)="focus1 = true"
+                    (blur)="focus1 = false"
+                    formControlName="fullName"
+                    [class.form-control-danger]="
+                      registrationForm.get('fullName').touched &&
+                      registrationForm.get('fullName').invalid
+                    "
+                    [class.form-control-success]="
+                      registrationForm.get('fullName').touched &&
+                      registrationForm.get('fullName').valid
+                    "
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    registrationForm.invalid &&
+                    registrationForm.get('fullName').touched
+                  "
+                  class="mt-0 mb-2"
+                >
+                  <small
+                    *ngIf="registrationForm.get('fullName').errors?.required"
+                    class="text-danger"
+                    >Full name is required</small
+                  >
+                  <small
+                    *ngIf="registrationForm.get('fullName').errors?.minlength"
+                    class="text-danger"
+                    >Name must have at least 6 charachters</small
+                  >
+                </div>
+                <label>Email</label>
+                <div
+                  class="input-group form-group-no-border"
+                  [class.has-danger]="
+                    (registrationForm.get('email').errors?.required ||
+                      registrationForm.get('email').errors?.minlength) &&
+                    registrationForm.get('email').touched
+                  "
+                  [class.has-success]="
+                    registrationForm.get('email').touched &&
+                    registrationForm.get('email').valid
+                  "
+                  [ngClass]="{ 'input-group-focus': focus === true }"
+                >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="nc-icon nc-email-85"></i>
+                    </span>
+                  </div>
+  
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Email"
+                    (focus)="focus = true"
+                    (blur)="focus = false"
+                    formControlName="email"
+                    [class.form-control-danger]="
+                      registrationForm.get('email').touched &&
+                      registrationForm.get('email').invalid
+                    "
+                    [class.form-control-success]="
+                      registrationForm.get('email').touched &&
+                      registrationForm.get('email').valid
+                    "
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    registrationForm.invalid &&
+                    registrationForm.get('email').touched
+                  "
+                  class="mt-0 mb-2"
+                >
+                  <small
+                    *ngIf="registrationForm.get('email').errors?.required"
+                    class="text-danger"
+                    >Email is required</small
+                  >
+                  <small
+                    *ngIf="registrationForm.get('email').errors?.email"
+                    class="text-danger"
+                    >Email has not valid form</small
+                  >
+                </div>
+                <label>Password</label>
+                <div
+                  class="input-group form-group-no-border"
+                  [ngClass]="{ 'input-group-focus': focus1 === true }"
+                >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="nc-icon nc-key-25"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Password"
+                    (focus)="focus1 = true"
+                    (blur)="focus1 = false"
+                    formControlName="password"
+                    [class.form-control-danger]="
+                      registrationForm.get('password').touched &&
+                      registrationForm.get('password').invalid
+                    "
+                    [class.form-control-success]="
+                      registrationForm.get('password').touched &&
+                      registrationForm.get('password').valid
+                    "
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    registrationForm.invalid &&
+                    registrationForm.get('password').touched
+                  "
+                  class="mt-0 mb-2"
+                >
+                  <small
+                    class="text-danger"
+                    *ngIf="registrationForm.get('password').errors?.pattern"
+                    >Password must contain at least one letter, at least one
+                    number, and be longer than six charaters.</small
+                  >
+                </div>
+                <label>Confirm password</label>
+                <div
+                  class="input-group form-group-no-border"
+                  [ngClass]="{ 'input-group-focus': focus1 === true }"
+                >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="nc-icon nc-key-25"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Password"
+                    (focus)="focus1 = true"
+                    (blur)="focus1 = false"
+                    formControlName="confirmPassword"
+                    [class.form-control-danger]="
+                      registrationForm.get('confirmPassword').touched &&
+                      registrationForm.get('confirmPassword').invalid
+                    "
+                    [class.form-control-success]="
+                      registrationForm.get('confirmPassword').touched &&
+                      registrationForm.get('confirmPassword').valid
+                    "
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    registrationForm.invalid &&
+                    registrationForm.get('password').touched &&
+                    registrationForm.get('confirmPassword').touched
+                  "
+                  class="mt-0 mb-2"
+                >
+                  <small
+                    class="text-danger"
+                    *ngIf="registrationForm.errors?.misMatch"
+                    >Passwords do not match</small
+                  >
+                </div>
+                <button class="btn btn-primary btn-block btn-round">
+                  Register
+                </button>
+              </form>
+  
+              <div class="forgot">
+                <a href="#" class="btn btn-link btn-primary">Forgot password?</a>
+              </div>
+            </div>
+            <div
+              class="flip-card-back d-flex align-items-center flex-column justify-content-center"
+            >
+              <h1 class="font-weight-bold mb-3">Insert your code here please</h1>
+              <form
+                [formGroup]="codeValidationForm"
+                (ngSubmit)="SubmitCode($event)"
+              >
+                <input
+                  type="text"
+                  class="form-control w-100"
+                  placeholder="Activation code"
+                  formControlName="code"
+                />
+                <button class="btn btn-primary btn-block btn-round mt-4">
+                  confirm
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,192 @@
+<div style="height: 100vh; width: 100%; margin: 200px">
+  <div class="squares square1"></div>
+  <div class="squares square2"></div>
+  <div class="squares square3"></div>
+  <div class="squares square5"></div>
+  <div class="squares square5"></div>
+  <div class="squares square5"></div>
+  <div class="squares square7"></div>
+  <div class="containerr row w-100" *ngIf="display === 0">
+    <div class="company-container col-7">
+      <div class="company-header">
+        <h3 class="font-weight-bold title display-5">Your companies</h3>
+      </div>
+
+      <div
+        class="companies-list col-3 d-flex justify-content-center align-items-center"
+        *ngFor="let company of userCompanies"
+      >
+        <div class="company">
+          <h4 class="font-weight-bold teamName">{{ company.name }}</h4>
+
+          <p class="font-weight-bold text-center">{{ company.city }}</p>
+          <button
+            class="btn btn-primary"
+            (click)="selectCompany(company.companyId)"
+          >
+            Select
+          </button>
+          <p *ngIf="company.isOwner">You are the owner</p>
+        </div>
+      </div>
+    </div>
+    <div class="button-container col-5">
+      <button class="btn btn-outline-primary" (click)="displayOpt(2)">
+        JOIN A COMPANY
+      </button>
+      <button class="btn btn-outline-danger" (click)="displayOpt(1)">
+        ADD A COMPANY
+      </button>
+    </div>
+  </div>
+
+  <form
+    *ngIf="display === 1"
+    class="register-form"
+    [formGroup]="createCompany"
+    (ngSubmit)="SubmitCreate($event)"
+  >
+    <label>Company Name</label>
+    <div
+      class="input-group form-group-no-border"
+      [ngClass]="{ 'input-group-focus': focus === true }"
+    >
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="nc-icon nc-email-85"></i>
+        </span>
+      </div>
+
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Name"
+        (focus)="focus = true"
+        (blur)="focus = false"
+        formControlName="email"
+      />
+    </div>
+    <div
+      *ngIf="createCompany.invalid && createCompany.get('email').touched"
+      class="mt-0 mb-2"
+    >
+      <small
+        *ngIf="createCompany.get('email').errors?.required"
+        class="text-danger"
+        >Name is required</small
+      >
+      <small
+        *ngIf="createCompany.get('email').errors?.email"
+        class="text-danger"
+        >Name has not valid form</small
+      >
+    </div>
+    <label>City</label>
+    <div
+      class="input-group form-group-no-border"
+      [ngClass]="{ 'input-group-focus': focus1 === true }"
+    >
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="nc-icon nc-key-25"></i>
+        </span>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Zenica"
+        (focus)="focus1 = true"
+        (blur)="focus1 = false"
+        formControlName="password"
+        [class.form-control-danger]="
+          createCompany.get('password').touched &&
+          createCompany.get('password').invalid
+        "
+        [class.form-control-success]="
+          createCompany.get('password').touched &&
+          createCompany.get('password').valid
+        "
+      />
+    </div>
+    <div
+      *ngIf="createCompany.invalid && createCompany.get('password').touched"
+      class="mt-0 mb-2"
+    >
+      <small
+        class="text-danger"
+        *ngIf="createCompany.get('password').errors?.pattern"
+        >Password must contain at least one letter, at least one number, and be
+        longer than six charaters.</small
+      >
+      <small
+        class="text-danger"
+        *ngIf="createCompany.get('password').errors?.required"
+        >Password must contain at least one letter, at least one number, and be
+        longer than six charaters.</small
+      >
+    </div>
+
+    <button class="btn btn-primary btn-block btn-round">Create Company</button>
+    <button class="btn btn-primary backBtn" (click)="displayOpt(0)">
+      Go Back
+    </button>
+  </form>
+
+  <form
+    *ngIf="display === 2"
+    class="register-form"
+    [formGroup]="joinCompany"
+    (ngSubmit)="SubmitJoinCompany($event)"
+  >
+    <label>Company Code</label>
+    <div
+      class="input-group form-group-no-border"
+      [class.has-danger]="
+        joinCompany.get('email').errors?.required &&
+        joinCompany.get('email').touched
+      "
+      [class.has-success]="
+        joinCompany.get('email').touched && joinCompany.get('email').valid
+      "
+      [ngClass]="{ 'input-group-focus': focus === true }"
+    >
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="nc-icon nc-email-85"></i>
+        </span>
+      </div>
+
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Company Code"
+        (focus)="focus = true"
+        (blur)="focus = false"
+        formControlName="email"
+        [class.form-control-danger]="
+          joinCompany.get('email').touched && joinCompany.get('email').invalid
+        "
+        [class.form-control-success]="
+          joinCompany.get('email').touched && joinCompany.get('email').valid
+        "
+      />
+    </div>
+    <div
+      *ngIf="joinCompany.invalid && joinCompany.get('email').touched"
+      class="mt-0 mb-2"
+    >
+      <small
+        *ngIf="joinCompany.get('email').errors?.required"
+        class="text-danger"
+        >Email is required</small
+      >
+      <small *ngIf="joinCompany.get('email').errors?.email" class="text-danger"
+        >Email has not valid form</small
+      >
+    </div>
+    <button class="btn btn-primary btn-block btn-round">Send Request</button>
+    <button class="btn btn-primary backBtn" (click)="displayOpt(0)">
+      Go Back
+    </button>
+  </form>
+</div>

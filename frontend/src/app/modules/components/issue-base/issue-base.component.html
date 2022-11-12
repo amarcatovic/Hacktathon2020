@@ -1,0 +1,340 @@
+<app-sidebar></app-sidebar>
+<!-- <div class="page">
+    <div class="page-content" style="padding-top: 90px">
+        <h2 class="page-title"> Issue base </h2>
+        <input (change)='searchResults()' id="search-field" [(ngModel)]="issueSearch" class="form-control search-field" type="text" placeholder="Search issues" /> 
+        <br/>
+        <div class="list-issue">
+            <ul class="issue-list">
+                <li class="issue" *ngFor="let issue of issues | search:issueSearch:'title'">
+                    <h6 class="issue-title">{{ issue.title }}</h6>
+                    <p *ngIf="issue.code === 1" class="issue-content">{{ formatHtml(issue.content) }}</p>
+                    <p *ngIf="issue.code === 2" class="issue-content">{{ formatCode(issue.content) }}</p>
+                    <ul class="list-of-comments">
+                    <li *ngFor="let comment of issue.comments">
+                        <p class="comment-content">{{ comment.content }}</p>
+                        <p *ngIf="comment.code === 1" class="comment-content">{{ formatHtml(issue.content) }}</p>
+                        <p *ngIf="comment.code === 2" class="comment-content">{{ formatCode(issue.content) }}</p>
+                    </li>
+                </ul>
+                <button class="add-comment" (click)="toggleComment(issue.id, issue.title)">COMMENT</button>
+                </li>           
+            </ul>          
+        </div>
+
+        <div class="comment-area" *ngIf="commentToggle">
+            Answering for: {{ questionTitle }}
+            <div>
+                <button class="btn btn-second textBtnC" [class.active]="code === 0" (click)="selectCodeFormat(0)">TEXT</button> 
+                <button class="btn btn-second htmlBtnC" [class.active]="code === 1" (click)="selectCodeFormat(1)">HTML</button>
+                <button class="btn btn-second codeBtnC" [class.active]="code === 2" (click)="selectCodeFormat(2)">CODE</button>
+            </div>
+            <div class="comment-contetn-area"></div>
+            <textarea class="text comment-text" id="comment-text" [(ngModel)]="commentAnswer"></textarea>
+            <br>
+            <button class="btn" (click)="addComment()">Add comment</button>
+        </div>
+
+        <button class="btn" (click)="toggleQuestiion()">Ask question</button>
+
+        <div class="question-area" *ngIf="questionToggle">
+            <h2>What's wrong?</h2>
+            <input class="question-title" id="question-title" type="text" [(ngModel)]="questionTitleCreate"/>
+            <br>
+            <div class="button-list">
+                <button class="btn btn-second textBtnQ" [class.active]="code === 0" (click)="selectCodeFormat(0)">TEXT</button>
+                <button class="btn btn-second htmlBtnQ" [class.active]="code === 1" (click)="selectCodeFormat(1)">HTML</button>
+                <button class="btn btn-second codeBtnQ" [class.active]="code === 2" (click)="selectCodeFormat(2)">CODE</button>
+            </div>    
+        
+            <h5>Paste code or explain your problem in details</h5>
+            <textarea class="text question-text" id="question-text" [(ngModel)]="questionQuestion"></textarea>
+            <br>
+            <button class="btn" (click)="addQuestion()">Add question</button>
+        </div>
+    </div>
+</div> -->
+<div class="squares square1"></div>
+<div class="squares square2"></div>
+<div class="squares square3"></div>
+<div class="squares square5"></div>
+<div class="squares square5"></div>
+<div class="squares square5"></div>
+<div class="squares square7"></div>
+<div
+  style="
+    margin-left: 60px;
+    padding-top: 100px;
+    height: 100vh;
+    flex-direction: column;
+  "
+  class="d-flex"
+>
+  <div class="w-75">
+    <h1 class="mb-5 font-weight-bold text-primary" style="padding-left: 50px">
+      Issue Base
+    </h1>
+  </div>
+  <div class="w-100 d-flex">
+    <div class="search-bar md-form col-8">
+      <input
+        (change)="searchResults()"
+        [(ngModel)]="issueSearch"
+        style="margin-left: 50px"
+        class="form-control"
+        type="text"
+        placeholder="Search issues"
+      />
+      <button
+        class="btn btn-outline-primary ml-3 mt-5"
+        (click)="toggleQuestiion()"
+      >
+        Ask question
+      </button>
+
+      <div class="question-area" *ngIf="questionToggle">
+        <h2>What's wrong?</h2>
+        <input
+          class="question-title"
+          id="question-title"
+          type="text"
+          [(ngModel)]="questionTitleCreate"
+        />
+        <br />
+        <div class="button-list">
+          <button
+            class="btn btn-second textBtnQ"
+            [class.active]="code === 0"
+            (click)="selectCodeFormat(0)"
+          >
+            TEXT
+          </button>
+          <button
+            class="btn btn-second htmlBtnQ"
+            [class.active]="code === 1"
+            (click)="selectCodeFormat(1)"
+          >
+            HTML
+          </button>
+          <button
+            class="btn btn-second codeBtnQ"
+            [class.active]="code === 2"
+            (click)="selectCodeFormat(2)"
+          >
+            CODE
+          </button>
+        </div>
+
+        <h5>Paste code or explain your problem in details</h5>
+        <textarea
+          class="text question-text"
+          id="question-text"
+          [(ngModel)]="questionQuestion"
+        ></textarea>
+        <br />
+        <button class="btn ml-2" (click)="addQuestion()">Add question</button>
+      </div>
+    </div>
+  </div>
+  <div class="row ml-2" style="width: 97%; height: 200px !important">
+    <div
+      class="col-10 issue ml-5 mt-2 mt-2"
+      *ngFor="let issue of issues | search: issueSearch:'title'"
+    >
+      <div class="row pt-4 pb-4 pl-0">
+        <div class="col-1 d-flex justify-content-end">
+          <img [src]="issue.userImageUrl" class="img" />
+        </div>
+        <div class="col-11">
+          <h4 class="m-0 font-weight-bold">{{ issue.title }}</h4>
+          <small class="font-weight-bold">Issue by: {{ issue.userName }}</small>
+          <pre *ngIf="issue.code === 0" class="issue-content">
+            {{ issue.content }}
+          </pre>
+          <pre *ngIf="issue.code === 1" class="issue-content">
+            {{ formatHtml(issue.content) }}
+          </pre>
+          <pre *ngIf="issue.code === 2" class="issue-content">
+            {{ formatCode(issue.content) }}
+          </pre>
+          <ul class="list-of-comments">
+            <li *ngFor="let comment of issue.comments">
+              <pre *ngIf="comment.code === 0" class="comment-content">
+                {{ comment.content }}
+              </pre>
+              <pre *ngIf="comment.code === 1" class="comment-content">
+                {{ formatHtml(comment.content) }}
+              </pre>
+              <pre *ngIf="comment.code === 2" class="comment-content">
+                {{ formatCode(comment.content) }}
+              </pre>
+            </li>
+          </ul>
+          <button
+            class="btn btn-outline-danger mb-3"
+            (click)="toggleComment(issue.id, issue.title)"
+          >
+            COMMENT
+          </button>
+          <div class="comment-area" *ngIf="commentToggle">
+            <strong> Answering for: {{ questionTitle }} </strong>
+            <div>
+              <button
+                class="btn btn-second textBtnC"
+                [class.active]="code === 0"
+                (click)="selectCodeFormat(0)"
+              >
+                TEXT
+              </button>
+              <button
+                class="btn btn-second htmlBtnC"
+                [class.active]="code === 1"
+                (click)="selectCodeFormat(1)"
+              >
+                HTML
+              </button>
+              <button
+                class="btn btn-second codeBtnC"
+                [class.active]="code === 2"
+                (click)="selectCodeFormat(2)"
+              >
+                CODE
+              </button>
+            </div>
+            <div class="comment-contetn-area"></div>
+            <textarea
+              class="text comment-text"
+              id="comment-text"
+              [(ngModel)]="commentAnswer"
+            ></textarea>
+            <br />
+            <button class="btn" (click)="addComment()">Add comment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="list-issue" style="margin-left: 35px">
+    <ul class="issue-list">
+      <li
+        class="issue"
+        *ngFor="let issue of issues | search: issueSearch:'title'"
+        style="margin-bottom: 10px"
+      >
+        <h6 class="issue-title">{{ issue.title }}</h6>
+        <pre *ngIf="issue.code === 0" class="issue-content">
+          {{ issue.content }}
+        </pre>
+        <pre *ngIf="issue.code === 1" class="issue-content">
+          {{ formatHtml(issue.content) }}
+        </pre>
+        <pre *ngIf="issue.code === 2" class="issue-content">
+          {{ formatCode(issue.content) }}
+        </pre>
+
+
+
+        <ul class="list-of-comments">
+          <li *ngFor="let comment of issue.comments">
+            <pre *ngIf="comment.code === 0" class="comment-content">
+              {{ comment.content }}
+            </pre>
+            <pre *ngIf="comment.code === 1" class="comment-content">
+              {{ formatHtml(comment.content) }}
+            </pre>
+            <pre *ngIf="comment.code === 2" class="comment-content">
+              {{ formatCode(comment.content) }}
+            </pre>
+          </li>
+        </ul>
+        <button
+          class="add-comment"
+          (click)="toggleComment(issue.id, issue.title)"
+        >
+          COMMENT
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="comment-area" *ngIf="commentToggle">
+    Answering for: {{ questionTitle }}
+    <div>
+      <button
+        class="btn btn-second textBtnC"
+        [class.active]="code === 0"
+        (click)="selectCodeFormat(0)"
+      >
+        TEXT
+      </button>
+      <button
+        class="btn btn-second htmlBtnC"
+        [class.active]="code === 1"
+        (click)="selectCodeFormat(1)"
+      >
+        HTML
+      </button>
+      <button
+        class="btn btn-second codeBtnC"
+        [class.active]="code === 2"
+        (click)="selectCodeFormat(2)"
+      >
+        CODE
+      </button>
+    </div>
+    <div class="comment-contetn-area"></div>
+    <textarea
+      class="text comment-text"
+      id="comment-text"
+      [(ngModel)]="commentAnswer"
+    ></textarea>
+    <br />
+    <button class="btn" (click)="addComment()">Add comment</button>
+  </div>
+
+  <button class="btn" (click)="toggleQuestiion()">Ask question</button>
+
+  <div class="question-area" *ngIf="questionToggle">
+    <h2>What's wrong?</h2>
+    <input
+      class="question-title"
+      id="question-title"
+      type="text"
+      [(ngModel)]="questionTitleCreate"
+    />
+    <br />
+    <div class="button-list">
+      <button
+        class="btn btn-second textBtnQ"
+        [class.active]="code === 0"
+        (click)="selectCodeFormat(0)"
+      >
+        TEXT
+      </button>
+      <button
+        class="btn btn-second htmlBtnQ"
+        [class.active]="code === 1"
+        (click)="selectCodeFormat(1)"
+      >
+        HTML
+      </button>
+      <button
+        class="btn btn-second codeBtnQ"
+        [class.active]="code === 2"
+        (click)="selectCodeFormat(2)"
+      >
+        CODE
+      </button>
+    </div>
+
+    <h5>Paste code or explain your problem in details</h5>
+    <textarea
+      class="text question-text"
+      id="question-text"
+      [(ngModel)]="questionQuestion"
+    ></textarea>
+    <br />
+    <button class="btn" (click)="addQuestion()">Add question</button>
+  </div>
+</div> -->
+</div>

@@ -1,0 +1,69 @@
+<div class="navigation" id="side" style="margin-top: 50px" (click)="close()">
+  <ul>
+    <li>
+      <a
+        [routerLink]="['/main']"
+        routerLinkActive="router-link-active"
+        class="d-flex align-items-center"
+      >
+        <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
+        <span class="title">Home</span>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/time']"
+        routerLinkActive="router-link-active"
+        class="d-flex align-items-center"
+      >
+        <span class="icon"
+          ><i class="fa fa-calendar-check-o" aria-hidden="true"></i
+        ></span>
+        <span class="title">Calendar</span>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/documentation']"
+        routerLinkActive="router-link-active"
+        class="d-flex align-items-center"
+      >
+        <span class="icon"
+          ><i class="fa fa-newspaper-o" aria-hidden="true"></i
+        ></span>
+        <span class="title">Documentation</span>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/issue-base']"
+        routerLinkActive="router-link-active"
+        class="d-flex align-items-center"
+      >
+        <span class="icon"
+          ><i class="fa fa-stack-overflow" aria-hidden="true"></i
+        ></span>
+        <span class="title">Issue Base</span>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/chat']"
+        routerLinkActive="router-link-active"
+        class="d-flex align-items-center"
+      >
+        <span class="icon"
+          ><i class="fa fa-commenting" aria-hidden="true"></i
+        ></span>
+        <span class="title">Messages</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="d-flex align-items-center">
+        <span class="icon"><i class="fa fa-info" aria-hidden="true"></i></span>
+        <span class="title">Help</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="toggle" (click)="toggleMenu()"></div>

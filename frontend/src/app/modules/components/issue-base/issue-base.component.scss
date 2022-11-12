@@ -1,0 +1,241 @@
+.page-title {
+  font-size: 2.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: rgba(85, 76, 119);
+  text-align: center;
+}
+
+.search-field {
+  display: block;
+  margin: auto;
+  width: 90%;
+  height: calc(2.249999625rem + 2px);
+  padding: 0.5rem 0.7rem;
+  line-height: 1.428571;
+  color: black;
+  background-color: transparent;
+  background-clip: padding-box;
+  border: 1px solid #cad1d7;
+  box-shadow: none;
+  border-color: rgba(85, 76, 119);
+  border-radius: 0.4285rem;
+  font-size: 0.7500000025rem;
+  transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
+}
+
+.search-field:focus {
+  border-color: #51bcda;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.issue-list {
+  list-style: none;
+  background: #1f2251;
+  border: 0;
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.issue-list h6 {
+  font-size: 30px;
+}
+
+.list-of-comments {
+  list-style: none;
+}
+
+.list-issue {
+  width: 98%;
+  position: relative;
+  transition: all 0.15s ease;
+  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07) !important;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  border: 0.0625rem solid rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+  background-clip: border-box;
+  padding: 1.5rem;
+  flex: 1 1 auto;
+  border-radius: 0 0 0.25rem 0.25rem;
+}
+
+.display {
+  display: flex;
+}
+
+.btn {
+  padding: 0.75rem 1rem;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.875rem;
+  background-color: rgba(85, 76, 119);
+  transition: all 0.15s ease;
+  border-radius: 0.25rem;
+  border: 0;
+  box-shadow: 0;
+}
+
+.btn:hover {
+  color: #fff;
+  background-color: rgba(85, 76, 119, 0.8);
+}
+
+.text,
+.comment-area,
+.question-area,
+.question-title {
+  width: 98%;
+  position: relative;
+  transition: all 0.15s ease;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  border: 0.0625rem solid rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+  background-clip: border-box;
+  padding: 1.5rem;
+  flex: 1 1 auto;
+  border-radius: 0 0 0.25rem 0.25rem;
+}
+
+.text:focus,
+.question-title:focus {
+  border: none;
+  outline: none;
+}
+
+.text {
+  height: 200px;
+  margin-left: 10px;
+}
+
+.active {
+  background: #51bcda !important;
+}
+
+.btn-second {
+  font-size: 12px;
+  padding: 12px 25px;
+  background: rgba(85, 76, 119);
+  border: 0;
+  position: relative;
+  width: 10%;
+  margin: 10px;
+  color: #fff;
+  transition: all 0.15s ease;
+  border-radius: 0.25rem;
+}
+
+.btn-second:hover {
+  color: #fff;
+  background-color: rgba(85, 76, 119, 0.8);
+}
+
+@media (min-width: 768px) {
+  .page {
+    margin-left: 85px;
+  }
+
+  .page-title {
+    text-align: left;
+  }
+
+  .search-field {
+    width: 50%;
+  }
+}
+.img {
+  width: 50px;
+  height: 50px;
+}
+.content {
+  opacity: 0.6;
+}
+.issue {
+  background-color: #559c8b18;
+  border-radius: 5px;
+}
+.question-title {
+  background-color: #559c8b18;
+}
+
+.squares {
+  animation: move-left-right 1s infinite;
+  position: absolute;
+  background-color: #559c8b2c;
+  transition: 0.5s ease-out;
+  overflow: hidden;
+  border-radius: 20%;
+  &.square1 {
+    animation: move-left-right 4s infinite;
+    height: 300px;
+    width: 300px;
+    opacity: 0.5;
+    left: 3%;
+    top: -21%;
+  }
+
+  &.square2 {
+    animation: move-left-right 6s infinite;
+    height: 400px;
+    width: 400px;
+    opacity: 0.4;
+    right: 15%;
+    top: -10%;
+  }
+
+  &.square3 {
+    animation: move-left-right 5s infinite;
+    height: 200px;
+    width: 200px;
+    opacity: 0.1;
+    left: -5%;
+    bottom: 0%;
+  }
+
+  &.square4 {
+    animation: move-left-right 10s infinite;
+    height: 100px;
+    width: 100px;
+    opacity: 0.9;
+    right: 27%;
+    top: 70%;
+  }
+
+  &.square5 {
+    animation: move-left-right 6s infinite;
+    height: 250px;
+    width: 250px;
+    opacity: 0.1;
+    left: 15%;
+    bottom: 10%;
+  }
+
+  &.square6 {
+    animation: move-left-right 9s infinite;
+    left: 10%;
+    top: 35%;
+    height: 80px;
+    width: 80px;
+    opacity: 0.8;
+  }
+
+  &.square7 {
+    animation: move-left-right 3s infinite;
+    width: 300px;
+    height: 300px;
+    right: 20%;
+    bottom: 0%;
+    opacity: 0.1;
+  }
+}
+.mainImgMin {
+  width: 30px;
+  height: 30px;
+}

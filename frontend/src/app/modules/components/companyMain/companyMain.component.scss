@@ -1,0 +1,209 @@
+iframe,
+html,
+body,
+div,
+header,
+footer,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.main {
+  background-image: url("https://cdn.discordapp.com/attachments/601552355804184674/779783542820962334/grey_background.png");
+  height: 100vh;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 150px;
+  //align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1em;
+  background-color: #72beac2f;
+  width: 100%;
+  height: 3em;
+  margin: 1em;
+  border-radius: 5px;
+}
+
+.results-container {
+  width: 100%;
+  max-height: 100%;
+}
+
+.users-container {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  padding-top: 150px;
+  //align-items: center;
+  flex-direction: column;
+  margin-left: 2em;
+}
+
+.user {
+  background-color: #6d658b;
+  color: #ffffff;
+  width: 100%;
+  height: 3em;
+  padding: 1em;
+  margin: 0.2em;
+  justify-content: flex-start;
+}
+
+.result-content,
+.user-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 0.5em;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(301deg)
+    brightness(102%) contrast(102%);
+}
+
+.user-state {
+  font-size: smaller;
+  justify-content: space-around;
+}
+.w-90 {
+  width: 90%;
+}
+.text-muted {
+  opacity: 0.7;
+}
+.breadcrumb {
+  background-color: #554c773a;
+  box-shadow: 0px 4px 1px 0px #eeeeee;
+  background-color: #559c8b08;
+}
+.userCard {
+  background-color: rgb(231, 231, 231);
+  border: 1px solid rgb(223, 223, 223);
+  height: 400px;
+}
+.rounded-circle {
+  width: 80px;
+  height: 80px;
+}
+.card {
+  height: 200px;
+  cursor: pointer;
+}
+
+@keyframes move-left-right {
+  0% {
+    transform: translateX(-10px);
+  }
+
+  50% {
+    transform: translateX(10px);
+  }
+
+  100% {
+    transform: translateX(-10px);
+  }
+}
+
+.squares {
+  animation: move-left-right 1s infinite;
+  position: absolute;
+  background-color: #559c8b2c;
+  transition: 0.5s ease-out;
+  overflow: hidden;
+  border-radius: 20%;
+  &.square1 {
+    animation: move-left-right 4s infinite;
+    height: 300px;
+    width: 300px;
+    opacity: 0.5;
+    left: 3%;
+    top: -21%;
+  }
+
+  &.square2 {
+    animation: move-left-right 6s infinite;
+    height: 400px;
+    width: 400px;
+    opacity: 0.4;
+    right: 20%;
+    top: -12%;
+  }
+
+  &.square3 {
+    animation: move-left-right 5s infinite;
+    height: 200px;
+    width: 200px;
+    opacity: 0.1;
+    left: -5%;
+    bottom: 0%;
+  }
+
+  &.square4 {
+    animation: move-left-right 10s infinite;
+    height: 100px;
+    width: 100px;
+    opacity: 0.9;
+    right: 27%;
+    top: 70%;
+  }
+
+  &.square5 {
+    animation: move-left-right 6s infinite;
+    height: 250px;
+    width: 250px;
+    opacity: 0.1;
+    left: 15%;
+    bottom: 10%;
+  }
+
+  &.square6 {
+    animation: move-left-right 9s infinite;
+    left: 10%;
+    top: 35%;
+    height: 80px;
+    width: 80px;
+    opacity: 0.8;
+  }
+
+  &.square7 {
+    animation: move-left-right 3s infinite;
+    width: 300px;
+    height: 300px;
+    right: 20%;
+    bottom: 0%;
+    opacity: 0.1;
+  }
+}
+.mainImg {
+  width: 30px;
+  height: 30px;
+}
